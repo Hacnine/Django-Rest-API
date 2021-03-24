@@ -1,22 +1,40 @@
-from datetime import datetime, timedelta
-import stripe
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render
+from rest_framework.renderers import JSONRenderer
+
+from .models import *
+from django.shortcuts import render
+
+from .models import *
+from .serializers import StudentSerializer
 
 
-def home(request):
+def student_detail(request, pk):
+    stu = Student.objects.get(id=pk)
+    # print('stu', stu)
+
+    serializer = StudentSerializer(stu)
+    # print('serializer', serializer)
+
+    json_data = JSONRenderer().render(serializer.data)
+    # print('json_data', json_data)
+
     context = {}
-    return render(request, 'home.html', context)
+    # return HttpResponse(json_data, content_type='application/json')
+    return JsonResponse(serializer.data)
 
 
-# def cart(request):
-#
-#     context = {}
-#     return render(request, 'cart.html', context)
-#
-#
-# def checkout(request):
-#
-#     context = {}
-#     return render(request, 'checkout.html', context)
+def student_list(request):
+    stu = Student.objects.all()
+    print('stu', stu)
 
+    serializer = StudentSerializer(stu, many=True)
+    print('serializer', serializer)
 
+    # json_data = JSONRenderer().render(serializer.data)
+    # print('json_data', json_data)
+
+    context = {}
+    # return HttpResponse(json_data, content_type='application/json')
+
+    return JsonResponse(serializer.data, safe=False)
