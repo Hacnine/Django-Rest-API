@@ -1,7 +1,7 @@
 import json
 import requests
 
-URL = "http://127.0.0.1:8000/"
+URL = "http://127.0.0.1:8000/crud/"
 
 
 def get_data(id=None):
@@ -18,7 +18,7 @@ def get_data(id=None):
     print(data)
 
 
-get_data()
+# get_data()
 
 
 def post_data():
@@ -34,7 +34,7 @@ def post_data():
     print(data)
 
 
-post_data()
+# post_data()
 
 
 def update_data():
@@ -44,8 +44,10 @@ def update_data():
         'roll': 103,
         'city': 'Meherpur'
     }
+    headers = {'content-type': 'application/json'}
+
     json_data = json.dumps(data)
-    req = requests.put(url=URL, data=json_data)
+    req = requests.put(url=URL, headers=headers, data=json_data)
     data = req.json()
     print(data)
 
@@ -55,14 +57,15 @@ def update_data():
 
 def delete_data():
     data = {
-        'id': 3,
+        'id': 6,
     }
     json_data = json.dumps(data)
-    req = requests.delete(url=URL, data=json_data)
+    headers = {'content-type': 'application/json'}
+    req = requests.delete(url=URL, headers=headers, data=json_data)
     data = req.json()
     print(data)
 
 
-# delete_data()
+delete_data()
 
 
