@@ -128,3 +128,7 @@ MEDIA_URL = '/images/product_images/'
 #     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 # }
 
+# write 'q' instead of 'search'
+# REST_FRAMEWORK = {
+#     'SEARCH_PARAM': 'q'
+# }
