@@ -10,12 +10,16 @@ class BookSerializer(serializers.ModelSerializer):
 
 
 class AuthorSerializer(serializers.ModelSerializer):
-    song = serializers.StringRelatedField(many=True, read_only=True)
+    # ref_book = serializers.StringRelatedField(many=True, read_only=True)
+    # ref_book = serializers.StringRelatedField(many=True, read_only=True)
+    # ref_book = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='book-detail')
+    # ref_book = serializers.SlugRelatedField(many=True, read_only=True, slug_field='page')
+    ref_book = serializers.HyperlinkedIdentityField(many=True, read_only=True, view_name='book-detail')
+
 
     class Meta:
         model = Author
-        # fields = ['id', 'name', 'gender', 'ref_book']
-        fields = ['id', 'name', 'gender']
+        fields = ['id', 'name', 'gender', 'ref_book']
 
 
 
